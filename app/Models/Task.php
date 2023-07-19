@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Status;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Task extends Model
 {
@@ -24,9 +25,9 @@ class Task extends Model
         {
             return $this->hasOne(User::class, 'user_id', 'id');
         }
-    public function status() :  HasOne
+    public function status() : BelongsTo
         {
-            return $this->HasOne(Status::class, 'id', 'status_id');
+            return $this->belongsTo(Status::class, 'status_id', 'id');
         }
 
 }

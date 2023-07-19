@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->unsignedBigInteger('user_id');
-            $table->timestamp('expiration')->default(now());
+            $table->timestamp('expiration');
             $table->timestamps();
 
             $table->foreign('user_id')

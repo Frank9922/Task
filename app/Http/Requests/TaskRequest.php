@@ -32,12 +32,6 @@ class TaskRequest extends FormRequest
                 'exists:users,id'
             ],
 
-            'status_id' => [
-                'required',
-                'integer',
-                'exists:statuses,id'
-            ],
-
             'expiration'=> [
                 'required',
                 'date',
