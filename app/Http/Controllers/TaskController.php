@@ -24,6 +24,7 @@ class TaskController extends Controller
         ], 201);
     }
 
+
     public function show(string $id) : JsonResource
     {
         return new TaskResource(Task::find($id));

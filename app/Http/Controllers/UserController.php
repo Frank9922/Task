@@ -30,7 +30,7 @@ class UserController extends Controller
         return new UserResource(User::find($id));
     }
 
-    public function update(UserRequest $request, string $id) : JsonResponse
+    public function update(UserRequest $request, string $id)
     {
         $user = User::find($id);
         $user->update($request->all());

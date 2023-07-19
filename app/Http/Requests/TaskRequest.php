@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TaskRequest extends FormRequest
@@ -22,8 +24,25 @@ class TaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:6',
-            'content'=> 'required|max:255',
+            'title' => 'required|min:3',
+            'content'=> 'required|min:3|max:505',
+            'user_id' => [
+                'required',
+                'integer',
+                'exists:users,id'
+            ],
+
+            'status_id' => [
+                'required',
+                'integer',
+                'exists:statuses,id'
+            ],
+
+            'expiration'=> [
+                'required',
+                'date',
+                'after:tomorrow'
+            ]
         ];
     }
 }

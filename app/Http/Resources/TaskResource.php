@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
-
+use App\Http\Resources\UserResource;
+use App\Http\Resources\StatusResource;
+use App\Models\Status;
 
 class TaskResource extends JsonResource
 {
@@ -22,10 +24,10 @@ class TaskResource extends JsonResource
             'titulo' => $this->title,
             'contenido' => $this->content,
             'creado' => Carbon::parse($this->created_at)->format('M d, Y H:i'),
-            'Por'=> User::find($this->user_id)->name(),
             'actualizado' => Carbon::parse($this->updated_at)->format('M d, Y H:i'),
             'expiracion' => Carbon::parse($this->expiration)->format('M d, Y H:i'),
-
+            'Por'=> new UserResource(User::find($this->user_id)),
+            'Estado' => new StatusResource(Status::find($this->status_id)),
         ];
     }
 }

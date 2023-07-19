@@ -11,19 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('content');
-            $table->unsignedBigInteger('user_id');
-            $table->timestamp('expiration')->default(now());
-            $table->timestamps();
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->unsignedBigInteger('status_id')->after('user_id');
 
-            $table->foreign('user_id')
+            $table->foreign('status_id')
                         ->references('id')
-                        ->on('users')
+                        ->on('statuses')
                         ->onDelete('cascade')
                         ->onUpdate('cascade');
+
         });
     }
 
@@ -32,6 +28,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropForeign('status_id');
+            $table->dropColumn('status_id');
+        });
     }
 };
