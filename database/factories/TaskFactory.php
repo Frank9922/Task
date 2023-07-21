@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,9 +17,9 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-                'title'=> fake()->title(),
+                'title'=> fake()->name(),
                 'content' => fake()->paragraph(),
-                'expiration' => fake()->dateTimeBetween(),
+                'expiration' => fake()->dateTimeBetween('now', '+2 weeks'),
                 'user_id' => fake()->numberBetween(1, 10),
                 'status_id' => fake()->numberBetween(1, 4),
         ];
