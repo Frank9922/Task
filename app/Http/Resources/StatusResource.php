@@ -15,7 +15,7 @@ class StatusResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'Estado' => $this->name,
+            'Nombre' => $this->name,
             'Descripcion' => $this->description
         ];
     }

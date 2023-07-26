@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\TaskInertia;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,4 +37,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::get('/tasks', [TaskInertia::class, 'index'])->name('tasks');
+    Route::get('/task/{id}', [TaskInertia::class, 'show'])->name('show');
 });

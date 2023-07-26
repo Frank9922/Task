@@ -18,7 +18,9 @@ class Task extends Model
             'content',
             'expiration',
             'user_id',
-            'status_id'
+            'status_id',
+            'short_description',
+            'color'
         ];
 
     public function user() : HasOne
