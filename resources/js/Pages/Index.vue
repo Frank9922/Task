@@ -23,6 +23,7 @@ defineProps({ tasks: Array})
                             v-bind:creado="item.creado"
                             v-bind:por="item.Por.nombre"
                             v-bind:estado="item.Estado.Nombre"
+                            v-bind:url_photo="item.Asignado.photo_url"
                             v-bind:url="item.url"
                             v-bind:color="item.color"
                             />
