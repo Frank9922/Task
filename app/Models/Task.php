@@ -20,13 +20,20 @@ class Task extends Model
             'user_id',
             'status_id',
             'short_description',
-            'color'
+            'color',
+            'created_by',
         ];
 
     public function user() : HasOne
         {
             return $this->hasOne(User::class, 'user_id', 'id');
         }
+
+    public function userby() : HasOne
+        {
+            return $this->hasOne(User::class, 'created_by', 'id');
+        }
+
     public function status() : BelongsTo
         {
             return $this->belongsTo(Status::class, 'status_id', 'id');

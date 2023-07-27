@@ -25,9 +25,10 @@ class VueTask extends JsonResource
             'creado' => Carbon::parse($this->created_at)->format('M d, Y H:i'),
             'actualizado' => Carbon::parse($this->updated_at)->format('M d, Y'),
             'expiracion' => Carbon::parse($this->expiration)->format('M d, Y'),
-            'url' => 'http://task.test/task/'. $this->id ,
+            'Asignado' => new UserResource(User::find($this->user_id)),
+            'url' => "xd",
             'color' => $this->color,
-            'Por'=> new UserResource(User::find($this->user_id)),
+            'Por'=> new UserResource(User::find($this->created_by)),
             'Estado' => new StatusResource(Status::find($this->status_id)),
         ])->toArray();
     }

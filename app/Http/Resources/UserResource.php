@@ -19,6 +19,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'nombre' => $this->name,
             'email' => $this->email,
+            'photo_url'=> env('APP_URL').'/storage/'.$this->profile_photo_path,
             'creado' => Carbon::parse($this->created_at)->format('M d, Y'),
             'actualizado' => Carbon::parse($this->updated_at)->format('M d, Y')
         ];
