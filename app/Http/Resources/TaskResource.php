@@ -8,6 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\StatusResource;
+use App\Models\Historial_estado;
 use App\Models\Status;
 
 class TaskResource extends JsonResource
@@ -17,18 +18,27 @@ class TaskResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+
     public function toArray(Request $request): array
     {
+        $historialCollection = Historial_estado::where('task_id', $this->id)->get();
+
+        $historialResource = $historialCollection->map(function ($historial){
+            return new HistorialResource($historial);
+        });
+
         return [
             'id' => $this->id,
             'titulo' => $this->title,
             'contenido' => $this->content,
+            'short_descripcion' => $this->short_description,
             'creado' => Carbon::parse($this->created_at)->format('M d, Y H:i'),
             'actualizado' => Carbon::parse($this->updated_at)->format('M d, Y H:i'),
             'expiracion' => Carbon::parse($this->expiration)->format('M d, Y H:i'),
             'Asignado'=>new UserResource(User::find($this->user_id)),
             'Por'=> new UserResource(User::find($this->created_by)),
             'Estado' => new StatusResource(Status::find($this->status_id)),
+            'Historial'=>$historialResource
         ];
     }
 }

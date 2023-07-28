@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Status;
+use App\Models\Historial_estado;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Task extends Model
@@ -39,4 +41,8 @@ class Task extends Model
             return $this->belongsTo(Status::class, 'status_id', 'id');
         }
 
+    public function historial() : BelongsToMany
+    {
+            return $this->belongsToMany(Historial_estado::class, 'task_id', 'id');
+    }
 }

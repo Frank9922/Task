@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskResource;
+use App\Models\Historial_estado;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -80,6 +81,13 @@ class TaskController extends Controller
             'success' => true,
             'message' => "Deleted $id"
         ], 200);
+    }
+
+    public function historial(int $id)
+    {
+        return response()->json([
+            'data' => Historial_estado::where('task_id', $id)->get()
+        ]);
     }
 
     private function filterById($query, $value)
