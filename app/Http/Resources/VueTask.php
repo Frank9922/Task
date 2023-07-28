@@ -26,7 +26,7 @@ class VueTask extends JsonResource
             'actualizado' => Carbon::parse($this->updated_at)->format('M d, Y'),
             'expiracion' => Carbon::parse($this->expiration)->format('M d, Y'),
             'Asignado' => new UserResource(User::find($this->user_id)),
-            'url' => "xd",
+            'url' => env('APP_URL').'/task/'.$this->id,
             'color' => $this->color,
             'Por'=> new UserResource(User::find($this->created_by)),
             'Estado' => new StatusResource(Status::find($this->status_id)),
