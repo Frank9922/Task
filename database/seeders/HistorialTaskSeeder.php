@@ -13,19 +13,26 @@ class HistorialTaskSeeder extends Seeder
     public function run(): void
     {
         Historial_estado::create([
-            'task_id' => 1,
+            'task_id' => 5,
             'user_id' => 1,
             'timestamp' => now(),
             'estado_anterior_id' => 1,
-            'estado_actual_id' => 2,
+            'estado_posterior_id' => 2,
         ]);
 
         Historial_estado::create([
-            'task_id' => 1,
+            'task_id' => 5,
             'user_id' => 1,
             'timestamp' => fake()->dateTime(),
             'estado_anterior_id' => 2,
-            'estado_actual_id' => 3,
+            'estado_posterior_id' => 3,
+        ]);
+        Historial_estado::create([
+            'task_id' => 5,
+            'user_id' => 1,
+            'timestamp' => fake()->dateTime(),
+            'estado_anterior_id' => 3,
+            'estado_posterior_id' => 4,
         ]);
     }
 }

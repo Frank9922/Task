@@ -21,7 +21,7 @@ class HistorialResource extends JsonResource
             'id'=> $this->id,
             'fecha_hora' => Carbon::parse($this->timestamp)->format('M d, Y H:i'),
             'estado_anterior' => Status::where('id', $this->estado_anterior_id)->pluck('name')->first(),
-            'estado_actual' => Status::where('id', $this->estado_actual_id)->pluck('name')->first(),
+            'estado_posterior' => Status::where('id', $this->estado_posterior_id)->pluck('name')->first(),
         ];
     }
 }

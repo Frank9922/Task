@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamp('timestamp');
             $table->unsignedBigInteger('estado_anterior_id');
-            $table->unsignedBigInteger('estado_actual_id');
+            $table->unsignedBigInteger('estado_posterior_id');
 
             $table->foreign('task_id')
                         ->references('id')
@@ -37,7 +37,7 @@ return new class extends Migration
                         ->onDelete('cascade')
                         ->onUpdate('cascade');
 
-            $table->foreign('estado_actual_id')
+            $table->foreign('estado_posterior_id')
                         ->references('id')
                         ->on('statuses')
                         ->onDelete('cascade')

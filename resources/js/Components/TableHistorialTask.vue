@@ -1,53 +1,44 @@
 <script>
 
+export default{
+    name: 'TableHistorial',
+    props: {
+        historial: Array
+    }
+}
+
 </script>
 
 <template>
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto pt-6">
         <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
             <thead class="ltr:text-left rtl:text-right">
             <tr>
-                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Name
+                <th class="w-[35px] whitespace-nowrap px-3 py-3 font-medium text-gray-900">
+                ID
+                </th>
+                <th class="whitespace-nowrap px-6 py-3 font-medium text-gray-900">
+                Modificado
                 </th>
                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Date of Birth
+                Estado Anterior
                 </th>
                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Role
-                </th>
-                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Salary
+                Estado Posterior
                 </th>
             </tr>
             </thead>
 
             <tbody class="divide-y divide-gray-200">
-            <tr>
+            <tr v-for ="item in historial">
                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                John Doe
+                {{ item.id }}
                 </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">24/05/1995</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Web Developer</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">$120,000</td>
-            </tr>
-
-            <tr>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Jane Doe
+                <td class="whitespace-nowrap px-6 py-3 text-gray-700 text-center">
+                    {{ item.fecha_hora }}
                 </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">04/11/1980</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Web Designer</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">$100,000</td>
-            </tr>
-
-            <tr>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Gary Barlow
-                </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">24/05/1995</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Singer</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">$20,000</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-center">{{ item.estado_anterior }}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-center">{{ item.estado_posterior }}</td>
             </tr>
             </tbody>
         </table>

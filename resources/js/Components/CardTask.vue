@@ -36,7 +36,7 @@ export default{
                    <b> Asignado por: </b>{{ por }}
                 </p>
                 <p class='text-[#3C3C4399] text-[17px] mr-2'>
-                    <b>Exp: </b>{{ url }}
+                    <b>Exp: </b>{{ expiracion }}
 
                 </p>
 

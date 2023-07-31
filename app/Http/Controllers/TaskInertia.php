@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Resources\VueTask;
+use App\Http\Resources\TaskResource;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Task;
@@ -14,7 +14,7 @@ class TaskInertia extends Controller
     public function index()
     {
         return Inertia::render('Index', [
-            'tasks'=> VueTask::collection(Task::all())
+            'tasks'=> TaskResource::collection(Task::all())
         ]);
     }
 
@@ -43,7 +43,7 @@ class TaskInertia extends Controller
     //     'task'=> new VueTask(Task::find($id))
     //     ]);
     return Inertia::render('ShowTask', [
-        'item' => new VueTask(Task::find($id))
+        'item' => new TaskResource(Task::find($id))
         ]);
     }
 
