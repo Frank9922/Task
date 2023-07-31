@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\TaskInertia;
+use App\Http\Controllers\ProfileTaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,7 +17,6 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/example', [ExampleController::class, 'index'])->name('example');
 
 
 Route::get('/', function () {
@@ -39,4 +38,5 @@ Route::middleware([
     })->name('dashboard');
     Route::get('/tasks', [TaskInertia::class, 'index'])->name('tasks');
     Route::get('/task/{id}', [TaskInertia::class, 'show'])->name('show');
+    Route::get('/user/profile/tasks', [ProfileTaskController::class, 'index'])->name('profile-tasks');
 });
