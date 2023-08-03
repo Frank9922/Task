@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TaskInertia;
 use App\Http\Controllers\ProfileTaskController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,5 +39,10 @@ Route::middleware([
     })->name('dashboard');
     Route::get('/tasks', [TaskInertia::class, 'index'])->name('tasks');
     Route::get('/task/{id}', [TaskInertia::class, 'show'])->name('show');
-    Route::get('/user/profile/tasks', [ProfileTaskController::class, 'index'])->name('profile-tasks');
+});
+Route::get('/error', function (){
+    return Inertia::render('ErrorPage');
+});
+Route::middleware(['Admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 });

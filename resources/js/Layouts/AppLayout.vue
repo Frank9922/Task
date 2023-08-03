@@ -13,6 +13,7 @@ defineProps({
 });
 
 const showingNavigationDropdown = ref(false);
+const showadmin = ref(false);
 
 const switchToTeam = (team) => {
     router.put(route('current-team.update'), {
@@ -21,7 +22,6 @@ const switchToTeam = (team) => {
         preserveState: false,
     });
 };
-
 const logout = () => {
     router.post(route('logout'));
 };
@@ -148,11 +148,9 @@ const logout = () => {
                                             Profile
                                         </DropdownLink>
 
-                                        <DropdownLink :href="route('profile-tasks')">
-                                            Mis Tareas
+                                        <DropdownLink v-if="$page.props.auth.user.role_id === 1" :href="route('admin.index')">
+                                            Admin
                                         </DropdownLink>
-
-
 
                                         <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
                                             API Tokens

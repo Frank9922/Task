@@ -140,6 +140,13 @@ const clearPhotoFileInput = () => {
                     autocomplete="name"
                 />
                 <InputError :message="form.errors.name" class="mt-2" />
+                <InputLabel for="name" value="Rol" />
+                <TextInput
+                v-model="user.role_id"
+                type="number"
+                class="mt-1 block w-full"
+                disabled
+                />
             </div>
 
             <!-- Email -->
@@ -174,6 +181,7 @@ const clearPhotoFileInput = () => {
                         A new verification link has been sent to your email address.
                     </div>
                 </div>
+
             </div>
         </template>
 

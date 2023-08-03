@@ -7,6 +7,7 @@ use App\Models\Task;
 
 class TaskInertia extends Controller
 {
+
     public function index()
     {
         return Inertia::render('Index', [
@@ -20,4 +21,5 @@ class TaskInertia extends Controller
         'item' => new TaskResource(Task::find($id))
         ]);
     }
+
 }
