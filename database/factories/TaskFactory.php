@@ -24,7 +24,7 @@ class TaskFactory extends Factory
                 'expiration' => fake()->dateTimeBetween('now', '+2 weeks'),
                 'user_id' => fake()->numberBetween(2, 10),
                 'created_by' => fake()->numberBetween(1, 3),
-                'status_id' => fake()->numberBetween(1, 4),
+                'status_id' => 3,
         ];
     }
 }

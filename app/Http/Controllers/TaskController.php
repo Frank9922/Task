@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskResource;
-use App\Http\Resources\EmptyQuery;
 use App\Models\Historial_estado;
 use App\Models\Task;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
+
 
 class TaskController extends Controller
 {
@@ -96,6 +96,32 @@ class TaskController extends Controller
         return response()->json([
             'data' => Historial_estado::where('task_id', $id)->get()
         ]);
+    }
+
+    public function pruebas(){
+    $tasks = Task::select('id', 'user_id')->orderBy('id', 'asc')->get();
+        foreach($tasks as $task){
+        for($i=1; $i<=2; $i++){
+            $aux = $i + 1;
+            DB::table('historial_estados')->insert([
+            'user_id' => $task->user_id,
+            'task_id' => $task->id,
+            'estado_anterior_id'=> $i,
+            'estado_posterior_id' =>$aux,
+            'timestamp' => now()
+            ]);
+
+        };}
+                        // DB::table('historial_estados')->insert([
+                // 'task_id' => $task->id,
+                // 'user_id' => $task->user_id,
+                // 'estado_anterior_id'=> $count,
+                // 'estado_posterior_id' =>$count++,
+                // ]);
+        // return response()->json([
+        //     'success' => true,
+        //     'task' => $task
+        // ], 200);
     }
 
     private function filterById($query, $value)

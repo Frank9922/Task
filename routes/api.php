@@ -9,3 +9,5 @@ Route::resource('/task', TaskController::class);
 Route::resource('/user', UserController::class);
 
 Route::get('/task-historial/{id}', [TaskController::class, 'historial']);
+
+Route::get('/pruebas', [TaskController::class, 'pruebas']);

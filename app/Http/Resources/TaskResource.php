@@ -36,7 +36,7 @@ class TaskResource extends JsonResource
             'descripcion_corta' => $this->short_description,
             'creado' => Carbon::parse($this->created_at)->format('M d, Y H:i'),
             'actualizado' => Carbon::parse($this->updated_at)->format('M d, Y H:i'),
-            'expiracion' => Carbon::parse($this->expiration)->format('M d, Y H:i'),
+            'expiracion' => Carbon::parse($this->expiration)->format('M d, Y'),
             'Asignado'=>new UserResource(User::find($this->user_id)),
             'url' => env('APP_URL'). '/task/'.$this->id,
             'color'=> $this->color,
