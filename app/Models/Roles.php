@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\User;
 
-class RoleUser extends Model
+class Roles extends Model
 {
     use HasFactory;
 

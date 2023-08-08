@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskResource;
+use App\Http\Resources\EmptyQuery;
 use App\Models\Historial_estado;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -59,9 +60,16 @@ class TaskController extends Controller
     }
 
 
-    public function show(string $id) : JsonResource
+    public function show(string $id)
     {
-        return new TaskResource(Task::find($id));
+        if(Task::find($id)){
+            return new TaskResource(Task::find($id));
+        }
+        else {
+            return response()->json([
+                'Message' => 'No se encontro la tarea con el id '.$id.', Por favor verifique su consulta!'
+            ], 400);
+        }
     }
 
     public function update(TaskRequest $request, $id)

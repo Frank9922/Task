@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\Roles;
 use Illuminate\Database\Seeder;
-use App\Models\RoleUser;
+
 
 class RoleSeeder extends Seeder
 {
@@ -13,13 +13,13 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        RoleUser::create([
+        Roles::create([
             'name' => 'admin'
         ]);
-        RoleUser::create([
+        Roles::create([
             'name' => 'User'
         ]);
-        RoleUser::create([
+        Roles::create([
             'name' => 'guest'
         ]);
     }

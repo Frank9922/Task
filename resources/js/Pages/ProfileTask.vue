@@ -24,7 +24,8 @@ defineProps({
                     <ul>
                         <div class="border p-4 pt-4 pb-4">
                             <div class="overflow-x-auto pt-6">
-                                <p>{{ user.data.nombre }}</p>
+                                <p>{{ user.data}}</p>
+                                <p>{{ tasks.data  }}</p>
                                 <div v-for="items in tasks">
                                     <div v-for="task in items">
                                         <!-- <p> {{ task }}</p> -->

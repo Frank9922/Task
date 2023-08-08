@@ -26,6 +26,10 @@ class StatusSeeder extends Seeder
             'description' => 'La tarea ha sido finalizada o completada exitosamente.'
         ]);
         Status::create([
+            'name' => 'Expirada',
+            'description' => 'La tarea no llego a completarse de manera correcta. '
+        ]);
+        Status::create([
             'name' => 'Cancelada',
             'description' => 'La tarea ha sido cancelada o interrumpida antes de su finalización.'
         ]);

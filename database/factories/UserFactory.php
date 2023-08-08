@@ -6,7 +6,6 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
@@ -31,7 +30,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'role_id' => 2,
             'email_verified_at' => now(),
-            'password' => Hash::make('123456789'), // password
+            'password' => Hash::make('123456789'),
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),

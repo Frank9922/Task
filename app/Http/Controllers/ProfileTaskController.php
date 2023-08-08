@@ -2,20 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TaskResource;
 use App\Http\Resources\UserResource;
-use App\Models\Task;
-use Illuminate\Support\Facades\Auth;
+use App\Mail\TareaAsignada;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ProfileTaskController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        $tasks = Task::where('user_id', $user->id)->get();
         return Inertia::render('ProfileTask', [
             'user'=> new UserResource($user),
-            'tasks'=>TaskResource::collection($tasks)
+        ]);
+    }
+
+    public function prueba(){
+        $tasks = DB::table('tasks')
+                    ->select('id', 'title', 'short_description', 'status_id', 'expiration')
+                    ->where('user_id', '=', 9)
+                    ->get();
+
+        Mail::to('francoleiva990@mail.com', 'to')->send(new TareaAsignada('FrancoLeiva'));
+
+        return Inertia::render('prueba', [
+            'tasks' => $tasks
         ]);
     }
 }

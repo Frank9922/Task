@@ -30,6 +30,8 @@ return new class extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
 
+            $table->dropForeign(['status_id']);
+            $table->dropColumn('status_id');
         });
     }
 };
