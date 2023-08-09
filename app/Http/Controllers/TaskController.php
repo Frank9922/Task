@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Historial_estado;
 use App\Models\Task;
@@ -44,7 +45,7 @@ class TaskController extends Controller
                 return response()->json([
                   'succes' => true,
                     'filtros' => true,
-                    'data' => $tasks
+                    'data' => TaskResource::collection($tasks)
                 ]);
             }
     }
@@ -72,7 +73,7 @@ class TaskController extends Controller
         }
     }
 
-    public function update(TaskRequest $request, $id)
+    public function update(UpdateTaskRequest $request, $id) : JsonResponse
     {
         $task = Task::find($id);
         $task->update($request->all());
@@ -98,8 +99,9 @@ class TaskController extends Controller
         ]);
     }
 
-    public function pruebas(){
-    $tasks = Task::select('id', 'user_id')->orderBy('id', 'asc')->get();
+    public function pruebas()
+    {
+        $tasks = Task::select('id', 'user_id')->orderBy('id', 'asc')->get();
         foreach($tasks as $task){
         for($i=1; $i<=2; $i++){
             $aux = $i + 1;
@@ -112,16 +114,6 @@ class TaskController extends Controller
             ]);
 
         };}
-                        // DB::table('historial_estados')->insert([
-                // 'task_id' => $task->id,
-                // 'user_id' => $task->user_id,
-                // 'estado_anterior_id'=> $count,
-                // 'estado_posterior_id' =>$count++,
-                // ]);
-        // return response()->json([
-        //     'success' => true,
-        //     'task' => $task
-        // ], 200);
     }
 
     private function filterById($query, $value)
