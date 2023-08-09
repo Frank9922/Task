@@ -21,6 +21,7 @@ class TaskController extends Controller
             'title' => 'filterByTitle',
             'content' => 'filterByContent',
             'user' => 'filterByUser',
+            'createdby' => 'filterByCreatedBy',
             'status' => 'filterByStatus',
         ];
         $llaves = [];
@@ -29,7 +30,7 @@ class TaskController extends Controller
             {
                 return response()->json([
                     'succes' => true,
-                    'filtros' => false,
+                    'filtrosActivos' => $request->all(),
                     'data'=> TaskResource::collection(Task::all())
                 ]);
             }
@@ -83,7 +84,7 @@ class TaskController extends Controller
         ], 200);
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
         Task::find($id)->delete();
         return response()->json([
@@ -92,7 +93,7 @@ class TaskController extends Controller
         ], 200);
     }
 
-    public function historial(int $id)
+    public function historial(int $id): JsonResponse
     {
         return response()->json([
             'data' => Historial_estado::where('task_id', $id)->get()
@@ -141,4 +142,8 @@ class TaskController extends Controller
         return $query->where('status_id', $value);
     }
 
+    private function filterByCreatedBy($query, $value)
+    {
+        return $query->where('created_by', $value);
+    }
 }
