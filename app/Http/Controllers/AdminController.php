@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\TaskRequest;
+use App\Models\Task;
 use Inertia\Inertia;
 
 class AdminController extends Controller
@@ -17,10 +18,12 @@ class AdminController extends Controller
 
     }
 
-    public function storeTask(){
+    public function store(TaskRequest $request)
+    {
+        $task = Task::create($request->all());
+        return redirect()->with('success', 'Tarea creada correctamente');
 
     }
-
     public function storeUser(){
 
     }
