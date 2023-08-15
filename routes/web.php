@@ -5,20 +5,9 @@ use App\Http\Controllers\ProfileTaskController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Models\Task;
+use App\Models\Historial_estado;
 use Inertia\Inertia;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -40,10 +29,25 @@ Route::middleware([
     Route::get('/tasks', [TaskInertia::class, 'index'])->name('tasks');
     Route::get('/task/{id}', [TaskInertia::class, 'show'])->name('show');
     Route::get('/profile/mis-tareas', [ProfileTaskController::class, 'index'])->name('profile.tasks');
-    Route::get('/pruebas', [ProfileTaskController::class, 'prueba'])->name('prueba');
+    Route::put('profile/mis-tareas/', [ProfileTaskController::class, 'updateStatus'])->name('profile.taskupdate');
+    Route::middleware(['Admin'])->group(function () {
+        Route::resource('/admin', AdminController::class);
+        Route::get('/admin/task', [AdminController::class, 'showtask'])->name('admin.showtask');
+    });
 });
+Route::get('/pruebaspapa', function (){
+    $user_id = Task::select('user_id')->where('id', '=', 1);
+    for($i=1; $i<=4; $i++){
+        $count = $i+1;
+        Historial_estado::create([
+            'task_id' => 1,
+            'user_id' => $user_id,
+            'estado_anterior_id'=> $i,
+            'estado_actual_id' => $count,
+        ]);
+    }
+    return response()->json([
+        'xd'=> $user_id
+    ]);
 
-Route::middleware(['Admin'])->group(function () {
-    Route::resource('/admin', AdminController::class);
-    // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 });
