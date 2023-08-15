@@ -1,10 +1,10 @@
 <script>
 
-export default{
-    name: 'TableHistorial',
+export default {
+    name: 'TableHistorialTask',
     props: {
-        historial: Array
-    }
+        Historial: Array,
+    },
 }
 
 </script>
@@ -15,7 +15,7 @@ export default{
             <thead class="ltr:text-left rtl:text-right">
             <tr>
                 <th class="w-[35px] whitespace-nowrap px-3 py-3 font-medium text-gray-900">
-                ID
+                Titulo
                 </th>
                 <th class="whitespace-nowrap px-6 py-3 font-medium text-gray-900">
                 Modificado
@@ -30,15 +30,15 @@ export default{
             </thead>
 
             <tbody class="divide-y divide-gray-200">
-            <tr v-for ="item in historial">
+            <tr v-for ="item in Historial">
                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                {{ item.id }}
+                {{ item }}
                 </td>
                 <td class="whitespace-nowrap px-6 py-3 text-gray-700 text-center">
-                    {{ item.fecha_hora }}
+                    {{ item }}
                 </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-center">{{ item.estado_anterior }}</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-center">{{ item.estado_posterior }}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-center">{{ item }}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-center">{{ item }}</td>
             </tr>
             </tbody>
         </table>

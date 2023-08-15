@@ -18,6 +18,7 @@ export default {
         expiracion: String,
         estado: String,
         estadoDrop: String,
+        status_id: Number
     },
     components: { Dropdown, DropdownLink },
     methods: {
@@ -45,8 +46,17 @@ export default {
         isDisabled(status) {
             return ['Completada', 'Expirada', 'Cancelada'].includes(status);
         },
-    },
-};
+        changeStatus(id, estado) {
+        this.$inertia.put('/profile/mis-tareas', {
+                payload: {
+                    id: parseInt(this.id),
+                    estado: this.status_id
+                }
+            });
+            this.$forceUpdate();
+        },
+}
+}
 
 </script>
 
@@ -54,9 +64,9 @@ export default {
     <div class="mx-auto container py-4 px-6">
         <div
             class="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:border-gray-700 rounded-lg border border-gray-400 mb-6 py-5 px-4">
-            <div>
+            <div class="overflow-auto">
                 <h4 class="text-gray-800 dark:text-gray-100 font-bold mb-3">{{ titulo }}</h4>
-                <p class="text-gray-800 dark:text-gray-100 text-sm">{{ contenido }}</p>
+                <p class="text-gray-800 dark:text-gray-100 text-sm flex">{{ contenido }}</p>
             </div>
             <div>
                 <span :class="getStatusClass(estado)">
@@ -80,9 +90,13 @@ export default {
                         </template>
                         <template #content>
                             <div>
-                                <form @submit.prevent="form.put('/profile/mis-tareas')">
-                                    <DropdownLink as="button" v-if="estado === 'Pendiente'">Empezar Tarea</DropdownLink>
-                                    <DropdownLink v-if="estado === 'En Proceso'">Terminar Tarea</DropdownLink>
+                                <form @submit.prevent="submit(id, status_id)">
+                                    <div v-if="estado === 'Pendiente'">
+                                        <DropdownLink as="button" v-on:click="changeStatus(id, status_id)">Empezar Tarea</DropdownLink>
+                                    </div>
+                                    <div v-if="estado === 'En Proceso'">
+                                        <DropdownLink as="button" v-on:click="changeStatus(id, status_id)">Terminar Tarea</DropdownLink>
+                                    </div>
                                 </form>
                             </div>
                         </template>
@@ -90,5 +104,6 @@ export default {
                 </div>
             </div>
         </div>
-    </div></template>
+    </div>
+</template>
 
