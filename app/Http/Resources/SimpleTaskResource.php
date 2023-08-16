@@ -19,13 +19,6 @@ class SimpleTaskResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $historialCollection = Historial_estado::where('task_id', $this->id)->get();
-        $name= User::where('id', $this->user_id)->first()->name;
-
-        $historialResource = $historialCollection->map(function ($historial){
-            return new HistorialResource($historial);
-        });
-
         return [
             'id' => $this->id,
             'titulo' => $this->title,
@@ -33,7 +26,6 @@ class SimpleTaskResource extends JsonResource
             'expiracion' => Carbon::parse($this->expiration)->format('M d, Y'),
             'status_id' => $this->status_id,
             'Estado' => new StatusResource(Status::find($this->status_id)),
-            'Historial' => $historialResource
         ];
     }
 }

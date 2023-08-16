@@ -35,7 +35,7 @@ class CreateTaskCommand extends Command
             'expiration' => fake()->dateTimeBetween('now', '+2 weeks'),
             'user_id' => $this->argument('user'),
             'created_by' => 1,
-            'status_id'=> fake()->numberBetween(1, 5)
+            'status_id'=> 1
           ]);
         }
         return Command::SUCCESS;
