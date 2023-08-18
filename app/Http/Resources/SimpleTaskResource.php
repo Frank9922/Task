@@ -25,7 +25,7 @@ class SimpleTaskResource extends JsonResource
             'contenido' => $this->content,
             'expiracion' => Carbon::parse($this->expiration)->format('M d, Y'),
             'status_id' => $this->status_id,
-            'Estado' => new StatusResource(Status::find($this->status_id)),
+            'estado' => $this->status->name,
         ];
     }
 }

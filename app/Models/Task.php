@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Status;
 use App\Models\Historial_estado;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Task extends Model
 {
@@ -41,8 +41,23 @@ class Task extends Model
             return $this->belongsTo(Status::class, 'status_id', 'id');
         }
 
-    public function historial() : BelongsToMany
-    {
-            return $this->belongsToMany(Historial_estado::class, 'task_id', 'id');
-    }
+    public function historialEstados() : HasMany
+        {
+            return $this->hasMany(Historial_estado::class, 'task_id', 'id');
+        }
+
+    public function updateAndMakeHistorial($newStatus, $taskId)
+        {
+            $task = Task::where('id', $taskId)->first();
+            //dd($task->id, $task->status_id,$newStatus, $task->user_id);
+            $this->update(['status_id' => $newStatus]);
+
+            Historial_estado::create([
+                'task_id' => $task->id,
+                'user_id' => $task->user_id,
+                'estado_anterior_id' => $task->status_id,
+                'estado_posterior_id' => $newStatus,
+                'timestamp' => now()
+            ]);
+        }
 }

@@ -1,5 +1,5 @@
 <script>
-export default{
+export default {
     name: 'TaskCard',
     props: {
         id: Number,
@@ -12,6 +12,29 @@ export default{
         url: String,
         url_photo: String,
         color: String
+    },
+    methods: {
+        getStatusClass(status){
+            switch(status) {
+                case 'Pendiente':
+                    return 'bg-yellow-100 block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-yellow-200 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                case 'En Proceso':
+                    return 'bg-blue-100 block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-blue-300 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                case 'Completada':
+                    return 'bg-green-100 block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-green-300 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                case 'Expirada':
+                    return 'bg-red-100 block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-red-300 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                case 'Cancelada':
+                    return 'bg-gray-100 block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-gray-300 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                default:
+                    return 'border border-gray-400 ';
+            }
+        }
     }
 }
 </script>
@@ -40,10 +63,10 @@ export default{
 
                 </p>
 
-                <a class='block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-[#FFC933DD] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80'>
+                <span :class="getStatusClass(estado)" class='block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-[#FFC933DD] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80'>
                     {{ estado }}
-                </a>
-                <a target='_blank' v-bind:href="url" class='block mt-1.5 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-[#F2ECE7] hover:text-[#000000dd] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80'>
+                </span>
+                <a target='_blank' v-bind:href="url" class='block mt-1.5 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-gray-300 hover:text-[#000000dd] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80'>
                     Ver
                 </a>
             </div>
