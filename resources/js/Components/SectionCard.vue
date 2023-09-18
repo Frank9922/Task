@@ -12,6 +12,29 @@ export default{
         url: String,
         color: String,
         Asignado_photo_url: String
+    },
+    methods: {
+        getStatusClass(status){
+            switch(status) {
+                case 'Pendiente':
+                    return 'bg-yellow-100 border-2 border-yellow-400 block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-yellow-200 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                case 'En Proceso':
+                    return 'bg-blue-100 border-2 border-blue-400 block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-blue-300 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                case 'Completada':
+                    return 'bg-green-100 border-2 border-green-400 block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-green-300 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                case 'Expirada':
+                    return 'bg-red-100 border-2 border-red-400 block  mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-red-300 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                case 'Cancelada':
+                    return 'bg-fuchsia-200 border-2 border-fuchsia-400 block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-fuchsia-400 focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80';
+
+                default:
+                    return 'border border-gray-400 ';
+            }
+        }
     }
 }
 </script>
@@ -30,13 +53,9 @@ export default{
                 <p class="mt-4 text-gray-600">
                     {{ contenido }}
                 </p>
-
-                <a
-                href="#"
-                class="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
-                >
-                {{ estado }}
-                </a>
+                <span :class="getStatusClass(estado)">
+                    {{ estado }}
+                </span>
             </div>
 
             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 ">

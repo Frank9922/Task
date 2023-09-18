@@ -18,7 +18,9 @@ export default {
         expiracion: String,
         estado: String,
         estadoDrop: String,
-        status_id: Number
+        status_id: Number,
+        newStatus: Number,
+        onReloadTasks: Function
     },
     components: { Dropdown, DropdownLink },
     methods: {
@@ -31,7 +33,7 @@ export default {
                     return 'bg-blue-100 text-blue-800 text-1xs font-medium mr-2 py-1 px-2.5 rounded dark:bg-blue-900 dark:text-blue-300 border border-blue-400';
 
                 case 'Completada':
-                    return 'bg-green-100 text-green-800 text-1xs font-medium mr-2 py-1 px-2.5 rounded dark:bg-green-900 dark:text-green-300 border border-green-400';
+                    return 'bg-green-100 text-green-800  text-1xs font-medium mr-2 py-1 px-2.5 rounded dark:bg-green-900 dark:text-green-300 border border-green-400';
 
                 case 'Expirada':
                     return 'bg-red-100 text-red-800 text-1xs font-medium mr-2 py-1 px-2.5 rounded dark:bg-red-900 dark:text-red-300 border border-red-400';
@@ -46,15 +48,22 @@ export default {
         isDisabled(status) {
             return ['Completada', 'Expirada', 'Cancelada'].includes(status);
         },
-        changeStatus(id, estado) {
-        this.$inertia.put('/profile/mis-tareas', {
+       async changeStatus(id, estado) {
+        try{
+        const response = await this.$inertia.put('/profile/mis-tareas', {
                 payload: {
                     id: parseInt(this.id),
                     estado: this.status_id
                 }
             });
-            this.$forceUpdate();
-        },
+            window.location.reload();
+
+        }
+        catch(error) {
+            console.log(error);
+        }
+
+    },
 }
 }
 
@@ -65,8 +74,8 @@ export default {
         <div
             class="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:border-gray-700 rounded-lg border border-gray-400 mb-6 py-5 px-4">
             <div class="overflow-auto">
-                <h4 class="text-gray-800 dark:text-gray-100 font-bold mb-3">{{ titulo }}</h4>
-                <p class="text-gray-800 dark:text-gray-100 text-sm flex">{{ contenido }}</p>
+                <h4 class="text-gray-800 dark:text-gray-100 font-bold mb-4">{{ titulo }}</h4>
+                <p class="text-gray-800 dark:text-gray-100 text-sm flex mb-4">{{ contenido }}</p>
             </div>
             <div>
                 <span :class="getStatusClass(estado)">

@@ -35,19 +35,3 @@ Route::middleware([
         Route::get('/admin/task', [AdminController::class, 'showtask'])->name('admin.showtask');
     });
 });
-Route::get('/pruebaspapa', function (){
-    $user_id = Task::select('user_id')->where('id', '=', 1);
-    for($i=1; $i<=4; $i++){
-        $count = $i+1;
-        Historial_estado::create([
-            'task_id' => 1,
-            'user_id' => $user_id,
-            'estado_anterior_id'=> $i,
-            'estado_actual_id' => $count,
-        ]);
-    }
-    return response()->json([
-        'xd'=> $user_id
-    ]);
-
-});

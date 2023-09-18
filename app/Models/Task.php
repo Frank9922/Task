@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Status;
 use App\Models\Historial_estado;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Task extends Model
 {
@@ -26,14 +26,14 @@ class Task extends Model
             'created_by',
         ];
 
-    public function user() : HasOne
+    public function user() : BelongsTo
         {
-            return $this->hasOne(User::class, 'user_id', 'id');
+            return $this->belongsTo(User::class, 'user_id', 'id');
         }
 
-    public function userby() : HasOne
+    public function userby() : BelongsTo
         {
-            return $this->hasOne(User::class, 'created_by', 'id');
+            return $this->belongsTo(User::class, 'created_by', 'id');
         }
 
     public function status() : BelongsTo
@@ -46,18 +46,18 @@ class Task extends Model
             return $this->hasMany(Historial_estado::class, 'task_id', 'id');
         }
 
-    public function updateAndMakeHistorial($newStatus, $taskId)
+    public function updateAndMakeHistorial($newStatus)
         {
-            $task = Task::where('id', $taskId)->first();
-            //dd($task->id, $task->status_id,$newStatus, $task->user_id);
-            $this->update(['status_id' => $newStatus]);
-
             Historial_estado::create([
-                'task_id' => $task->id,
-                'user_id' => $task->user_id,
-                'estado_anterior_id' => $task->status_id,
+                'task_id' => $this->id,
+                'user_id' => $this->user_id,
+                'estado_anterior_id' => $this->status_id,
                 'estado_posterior_id' => $newStatus,
                 'timestamp' => now()
             ]);
+
+            return DB::transaction(function () use ($newStatus) {
+                $this->update(['status_id' => $newStatus]);
+            });
         }
 }

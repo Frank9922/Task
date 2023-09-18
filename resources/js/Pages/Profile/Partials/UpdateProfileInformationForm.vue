@@ -140,13 +140,32 @@ const clearPhotoFileInput = () => {
                     autocomplete="name"
                 />
                 <InputError :message="form.errors.name" class="mt-2" />
-                <InputLabel for="name" value="Rol" />
-                <TextInput
-                v-model="user.role_id"
-                type="number"
-                class="mt-1 block w-full"
-                disabled
-                />
+                <InputLabel for="name" value="Rol" class="mt-2"/>
+                <div v-if="user.role_id == 1">
+                    <TextInput
+                        placeholder="Administrador"
+                        type="number"
+                        class="mt-1 block w-full"
+                        disabled
+                        />
+                </div>
+                <div v-if="user.role_id == 2">
+                    <TextInput
+                        placeholder="Usuario"
+                        type="number"
+                        class="mt-1 block w-full"
+                        disabled
+                        />
+                </div>
+
+                <div v-if="user.role_id == 3">
+                    <TextInput
+                        placeholder="Invitado"
+                        type="number"
+                        class="mt-1 block w-full"
+                        disabled
+                        />
+                </div>
             </div>
 
             <!-- Email -->

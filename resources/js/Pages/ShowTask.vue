@@ -2,9 +2,8 @@
 import SectionCard from '@/Components/SectionCard.vue';
 import TableHistorialTask from '@/Components/TableHistorialTask.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { computed } from 'vue';
 
-defineProps({ item: Array}, {show: Boolean});
+defineProps({ item: Array, historial:Object}, {show: Boolean});
 
 
 </script>
@@ -20,19 +19,18 @@ defineProps({ item: Array}, {show: Boolean});
                     <ul >
                         <div class="border p-4 pt-4 pb-4">
                             <!-- <p>{{ item.data }}</p> -->
-
                             <SectionCard
                             v-bind:titulo="item.data.titulo"
                             v-bind:contenido="item.data.contenido"
                             v-bind:creado="item.data.creado"
-                            v-bind:por="item.data.Por.nombre"
-                            v-bind:estado="item.data.Estado.Nombre"
+                            v-bind:por="item.data.Por"
+                            v-bind:estado="item.data.Estado"
                             v-bind:expiracion="item.data.expiracion"
-                            v-bind:Asignado_photo_url="item.data.Asignado.photo_url"
+                            v-bind:Asignado_photo_url="item.data.photo_url"
                             />
                             <h2 class="text-3xl font-bold sm:text-5xl text-center pt-6 pb-6">Historial</h2>
                             <TableHistorialTask
-                            v-bind:historial="item.data.Historial"
+                            v-bind:Historial="historial.data"
                             />
                         </div>
                     </ul>

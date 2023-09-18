@@ -20,7 +20,7 @@ class HistorialResource extends JsonResource
         //$title = Task::where('id', '=', $this->task_id)->pluck('title')->first();
         return [
             'id_task' => $this->task_id,
-            'title' => $this->whenLoaded('task', function (){ return $this->task->title;}),
+            'title' => $this->task->title,
             'fecha_hora' => Carbon::parse($this->timestamp)->format('M d, Y H:i'),
             'estado_anterior' => $this->estadoAnterior->name,
             'estado_posterior' => $this->estadoPosterior->name
