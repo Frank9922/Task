@@ -27,9 +27,11 @@ defineProps({ tasks: Object})
                             v-bind:url="item.url"
                             v-bind:color="item.color"
                             />
-                            <PaginationTask
-                            v-bind:pagination="tasks.meta" />
                     </div>
+                            <PaginationTask
+                            v-bind:pagination="tasks.meta"
+                            class="pt-4 mb-4"
+                            />
                 </div>
             </div>
         </div>
