@@ -15,6 +15,12 @@ class Roles extends Model
         'name'
     ];
 
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
+
 
     public function user() : HasOne{
         return $this->hasOne(User::class, 'id', 'role_id');

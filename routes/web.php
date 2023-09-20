@@ -3,6 +3,7 @@
 use App\Http\Controllers\TaskInertia;
 use App\Http\Controllers\ProfileTaskController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PublicUserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Models\Task;
@@ -30,6 +31,8 @@ Route::middleware([
     Route::get('/task/{id}', [TaskInertia::class, 'show'])->name('show');
     Route::get('/profile/mis-tareas', [ProfileTaskController::class, 'index'])->name('profile.tasks');
     Route::put('profile/mis-tareas/', [ProfileTaskController::class, 'updateStatus'])->name('profile.taskupdate');
+    Route::get('/users', [PublicUserController::class, 'index'])->name('public.users.index');
+    Route::get('/user/{id}', [PublicUserController::class, 'showUser'])->name('public.user.show');
     Route::middleware(['Admin'])->group(function () {
         Route::resource('/admin', AdminController::class);
         Route::get('/admin/task', [AdminController::class, 'showtask'])->name('admin.showtask');
